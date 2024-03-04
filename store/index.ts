@@ -11,9 +11,6 @@ import {
   OnEdgesChange,
   OnNodesChange,
 } from "reactflow";
-
-import initialNodes from "./nodes";
-import initialEdges from "./edges";
 import { createWithEqualityFn } from "zustand/traditional";
 
 export type RFState = {
@@ -22,34 +19,37 @@ export type RFState = {
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
-  setNodes: (nodes: Node[]) => void;
+  addNode: (node: Node) => void;
   setEdges: (edges: Edge[]) => void;
 };
 
-// this is our useStore hook that we can use in our components to get parts of the store and call actions
 const useStore = createWithEqualityFn<RFState>((set, get) => ({
-  nodes: initialNodes,
-  edges: initialEdges,
+  nodes: [] as Node[],
+  edges: [] as Edge[],
   onNodesChange: (changes: NodeChange[]) => {
-    // console.log({ changes });
     set({
       nodes: applyNodeChanges(changes, get().nodes),
     });
   },
   onEdgesChange: (changes: EdgeChange[]) => {
+    console.log({ changes });
+
     set({
       edges: applyEdgeChanges(changes, get().edges),
     });
   },
   onConnect: (connection: Connection) => {
+    console.log({ connection });
+
     set({
       edges: addEdge(connection, get().edges),
     });
   },
-  setNodes: (nodes: Node[]) => {
-    set({ nodes });
+  addNode: (node: Node) => {
+    set(({ nodes }) => ({ nodes: [...nodes, node] }));
   },
   setEdges: (edges: Edge[]) => {
+    console.log({ edges });
     set({ edges });
   },
 }));
