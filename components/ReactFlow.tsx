@@ -3,24 +3,14 @@
 import React, { useMemo } from "react";
 import ReactFlow, { Controls } from "reactflow";
 
-import useStore, { RFState } from "@/store";
-import { shallow } from "zustand/shallow";
+import useStore from "@/store";
 import { Message } from "@/components/Nodes/Message";
-
-const selector = (state: RFState) => ({
-  nodes: state.nodes,
-  edges: state.edges,
-  onNodesChange: state.onNodesChange,
-  onEdgesChange: state.onEdgesChange,
-  onConnect: state.onConnect,
-});
 
 export default function App() {
   const nodeTypes = useMemo(() => ({ message: Message }), []);
 
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useStore(
-    selector,
-    shallow,
+    (state) => state,
   );
 
   return (
@@ -33,6 +23,7 @@ export default function App() {
       <ReactFlow
         nodes={nodes}
         edges={edges}
+        // @ts-ignore
         nodeTypes={nodeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
