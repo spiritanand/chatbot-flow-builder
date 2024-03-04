@@ -58,3 +58,23 @@
         @apply bg-background text-foreground;
     }
 }
+
+.flow-builder {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 1rem;
+    grid-template-areas:
+        "nodes-panel main main main main main settings-panel settings-panel"
+}
+
+main {
+    grid-area: main;
+}
+
+#nodes-panel {
+    grid-area: nodes-panel;
+}
+
+#settings-panel {
+    grid-area: settings-panel;
+}
