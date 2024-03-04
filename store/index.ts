@@ -65,14 +65,15 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
     });
   },
   onConnect: (connection: Connection) => {
+    // Prevent self-connections
     if (connection.source === connection.target) return;
 
     if (
       get().edges.some(
         (edge) =>
+          // Prevent new connection from same source
           edge.source === connection.source ||
-          (edge.source === connection.source &&
-            edge.target === connection.target) ||
+          // Prevent reverse connections
           (edge.source === connection.target &&
             edge.target === connection.source),
       )
