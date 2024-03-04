@@ -7,7 +7,9 @@ import toast from "react-hot-toast";
 function Header() {
   const { nodes, edges } = useStore((state) => state);
 
+  // Validate the flow before saving
   function handleSave() {
+    // If there are nodes but not enough edges, show an error
     if (nodes.length > 0 && edges.length !== nodes.length - 1) {
       toast.error("Please connect all nodes. Cannot save incomplete flow.");
 

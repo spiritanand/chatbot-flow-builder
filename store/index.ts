@@ -26,6 +26,7 @@ export type RFState = {
   setEdges: (edges: Edge[]) => void;
 };
 
+// Store to manage the state of the flow
 const useStore = createWithEqualityFn<RFState>((set, get) => ({
   nodes: [] as Node[],
   edges: [] as Edge[],

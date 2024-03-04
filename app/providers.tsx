@@ -8,10 +8,12 @@ import { useId } from "react";
 import { Toaster } from "react-hot-toast";
 
 function Providers({ children }: { children: React.ReactNode }) {
+  // Provide a unique id for the DndContext
   const dndId = useId();
 
   const { addNode, nodes, edges } = useStore((state) => state);
 
+  // If the drag ends over the droppable area, add a new node
   function handleDragEnd(event: DragEndEvent) {
     const { active, over, delta } = event;
 
@@ -23,11 +25,13 @@ function Providers({ children }: { children: React.ReactNode }) {
         type: "message",
         data: { label: `Node ${nodes.length + 1}` },
         position: {
+          // Ensure the node is dropped within the window
           x: Math.max(window.innerWidth + delta.x, 0),
           y: Math.max(delta.y + 15, 0),
         },
       };
 
+      // Add the new node to the store
       addNode(node);
     }
   }

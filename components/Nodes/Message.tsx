@@ -21,6 +21,7 @@ export function Message(props: NodeProps) {
 
   const { setActiveNode } = useStore((state) => state);
 
+  // Set the active node when "double" clicked
   return (
     <div
       className="bg-white p-4 focus:bg-red-500 rounded-lg shadow-md"
@@ -29,13 +30,23 @@ export function Message(props: NodeProps) {
       }}
     >
       <div>
-        <Handle type="target" position={Position.Left} className="w-3 h-3" />
+        <Handle
+          type="target"
+          position={Position.Left}
+          style={{
+            width: "0.8rem",
+            height: "0.8rem",
+          }}
+        />
         <p>{data.label}</p>
         <Handle
           type="source"
           position={Position.Right}
           id="a"
-          className="w-3 h-3"
+          style={{
+            width: "0.8rem",
+            height: "0.8rem",
+          }}
         />
       </div>
     </div>

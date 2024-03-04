@@ -19,6 +19,9 @@ function NodesPanel() {
       </h4>
       <ul className="flex flex-col">
         {Nodes.map((node) => (
+          // Map through the nodes and render them as draggable elements
+          // This makes the nodes (of different types) draggable on top of a
+          // droppable area
           <Draggable key={node.id} id={node.id}>
             <p className="text-lg hover:font-bold transition-all flex-1 bg-gray-300 text-center p-2 rounded-sm shadow">
               {node.label}

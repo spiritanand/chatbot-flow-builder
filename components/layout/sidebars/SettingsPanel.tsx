@@ -31,6 +31,7 @@ function SettingsPanel() {
     setMessage(activeNode?.data.label || "");
   }, [activeNode?.data.label]);
 
+  // Form to update the label/message of the active node
   return (
     <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
       <Label

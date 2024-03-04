@@ -7,6 +7,8 @@ import NodesPanel from "@/components/layout/sidebars/NodesPanel";
 function SidePanel() {
   const { activeNode } = useStore((state) => state);
 
+  // If there is an active node, show the settings panel else show the nodes panel
+  // This is the sidebar that shows the settings for the active node
   return (
     <aside
       id="side-panel"
