@@ -7,9 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
 function SettingsPanel() {
-  const { activeNode, updateMessage, setActiveNode } = useStore(
-    (state) => state,
-  );
+  const { activeNode, updateLabel, setActiveNode } = useStore((state) => state);
 
   const [message, setMessage] = useState(activeNode?.data.label || "");
 
@@ -18,7 +16,7 @@ function SettingsPanel() {
 
     if (!activeNode || !message.trim()) return;
 
-    updateMessage(activeNode.id, message);
+    updateLabel(activeNode.id, message);
     setActiveNode(null);
   }
 

@@ -18,7 +18,7 @@ export type RFState = {
   edges: Edge[];
   activeNode: Node | null;
   setActiveNode: (nodeId: string | null) => void;
-  updateMessage: (nodeId: string, message: string) => void;
+  updateLabel: (nodeId: string, message: string) => void;
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
@@ -37,7 +37,7 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
       activeNode: nodes.find((node) => node.id === nodeId),
     }));
   },
-  updateMessage: (nodeId: string, message: string) => {
+  updateLabel: (nodeId: string, message: string) => {
     set(({ nodes }) => {
       const node = nodes.find((node) => node.id === nodeId);
 
@@ -69,6 +69,18 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
     console.log({ connection });
 
     if (connection.source === connection.target) return;
+
+    if (
+      get().edges.some(
+        (edge) =>
+          edge.source === connection.source ||
+          (edge.source === connection.source &&
+            edge.target === connection.target) ||
+          (edge.source === connection.target &&
+            edge.target === connection.source),
+      )
+    )
+      return;
 
     set(({ edges }) => {
       return {

@@ -11,9 +11,11 @@ function Providers({ children }: { children: React.ReactNode }) {
 
   const { addNode, nodes, edges } = useStore((state) => state);
 
+  console.log({ edges });
+
   function handleDragEnd(event: DragEndEvent) {
     console.log({ event });
-    const { active, over } = event;
+    const { active, over, delta } = event;
 
     if (!over || active.id === over.id) return;
 
@@ -23,8 +25,8 @@ function Providers({ children }: { children: React.ReactNode }) {
         type: "message",
         data: { label: `Node ${nodes.length + 1}` },
         position: {
-          x: 25,
-          y: 25,
+          x: Math.max(delta.x - 25, 0),
+          y: Math.max(delta.y - 25, 0),
         },
       };
 

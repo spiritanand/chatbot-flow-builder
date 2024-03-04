@@ -23,14 +23,21 @@ export function Message(props: NodeProps) {
 
   return (
     <div
-      className="bg-white p-4"
+      className="bg-white p-4 focus:bg-red-500 rounded-lg shadow-md"
       onDoubleClick={() => {
         setActiveNode(id);
       }}
     >
-      <Handle type="target" position={Position.Left} />
-      <p>{data.label}</p>
-      <Handle type="source" position={Position.Right} id="a" />
+      <div>
+        <Handle type="target" position={Position.Left} className="w-3 h-3" />
+        <p>{data.label}</p>
+        <Handle
+          type="source"
+          position={Position.Right}
+          id="a"
+          className="w-3 h-3"
+        />
+      </div>
     </div>
   );
 }
