@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "@/app/providers";
-import NodesPanel from "@/components/layout/sidebars/NodesPanel";
 import Header from "@/components/layout/Header";
-import SettingsPanel from "@/components/layout/sidebars/SettingsPanel";
 
 import "reactflow/dist/style.css";
 import "./globals.css";
+import SidePanel from "@/components/layout/sidebars/SidePanel";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +25,8 @@ export default function RootLayout({
         <Providers>
           <Header />
           <div className="flow-builder">
-            <NodesPanel />
             {children}
-            <SettingsPanel />
+            <SidePanel />
           </div>
         </Providers>
       </body>

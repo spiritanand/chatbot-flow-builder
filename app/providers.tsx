@@ -25,8 +25,8 @@ function Providers({ children }: { children: React.ReactNode }) {
         type: "message",
         data: { label: `Node ${nodes.length + 1}` },
         position: {
-          x: Math.max(delta.x - 25, 0),
-          y: Math.max(delta.y - 25, 0),
+          x: Math.max(window.innerWidth + delta.x, 0),
+          y: Math.max(delta.y + 15, 0),
         },
       };
 

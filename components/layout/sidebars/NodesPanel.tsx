@@ -13,13 +13,7 @@ const Nodes = [
 
 function NodesPanel() {
   return (
-    <aside
-      id="nodes-panel"
-      className="border-r border-gray-400 h-screen p-4"
-      style={{
-        height: "calc(100vh - 3.5rem)",
-      }}
-    >
+    <>
       <h4 className="text-2xl font-black text-center pb-3 border-b border-b-primary mb-5 text-primary">
         Nodes
       </h4>
@@ -32,7 +26,7 @@ function NodesPanel() {
           </Draggable>
         ))}
       </ul>
-    </aside>
+    </>
   );
 }
 

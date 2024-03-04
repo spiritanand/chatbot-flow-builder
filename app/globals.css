@@ -61,22 +61,19 @@
 
 .flow-builder {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
-        "nodes-panel main main main main main settings-panel settings-panel"
+        "main main main side-panel"
 }
 
 main {
     grid-area: main;
 }
 
-#nodes-panel {
-    grid-area: nodes-panel;
+#side-panel {
+    grid-area: side-panel;
 }
 
-#settings-panel {
-    grid-area: settings-panel;
-}
 
 .react-flow__node {
     width: fit-content !important;
