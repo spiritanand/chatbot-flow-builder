@@ -59,15 +59,11 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
     });
   },
   onEdgesChange: (changes: EdgeChange[]) => {
-    console.log({ changes });
-
     set({
       edges: applyEdgeChanges(changes, get().edges),
     });
   },
   onConnect: (connection: Connection) => {
-    console.log({ connection });
-
     if (connection.source === connection.target) return;
 
     if (
@@ -92,7 +88,6 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
     set(({ nodes }) => ({ nodes: [...nodes, node] }));
   },
   setEdges: (edges: Edge[]) => {
-    console.log({ edges });
     set({ edges });
   },
 }));

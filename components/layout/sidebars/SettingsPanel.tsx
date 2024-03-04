@@ -4,10 +4,12 @@ import useStore from "@/store";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 function SettingsPanel() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const { activeNode, updateLabel, setActiveNode } = useStore((state) => state);
 
   const [message, setMessage] = useState(activeNode?.data.label || "");
@@ -20,6 +22,10 @@ function SettingsPanel() {
     updateLabel(activeNode.id, message);
     setActiveNode(null);
   }
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     setMessage(activeNode?.data.label || "");
@@ -44,6 +50,7 @@ function SettingsPanel() {
         Text
       </Label>
       <Input
+        ref={inputRef}
         type="text"
         id="message"
         value={message}

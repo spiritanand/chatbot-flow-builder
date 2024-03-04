@@ -5,16 +5,14 @@ import { DROPPABLE } from "@/lib/constants";
 import useStore from "@/store";
 import { nanoid } from "nanoid";
 import { useId } from "react";
+import { Toaster } from "react-hot-toast";
 
 function Providers({ children }: { children: React.ReactNode }) {
   const dndId = useId();
 
   const { addNode, nodes, edges } = useStore((state) => state);
 
-  console.log({ edges });
-
   function handleDragEnd(event: DragEndEvent) {
-    console.log({ event });
     const { active, over, delta } = event;
 
     if (!over || active.id === over.id) return;
@@ -36,6 +34,13 @@ function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <DndContext id={dndId} onDragEnd={handleDragEnd}>
+      <Toaster
+        position="top-center"
+        gutter={8}
+        toastOptions={{
+          duration: 5000,
+        }}
+      />
       {children}
     </DndContext>
   );
