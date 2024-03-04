@@ -78,3 +78,12 @@ main {
 #settings-panel {
     grid-area: settings-panel;
 }
+
+.react-flow__node {
+    width: fit-content !important;
+    height: fit-content !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,59 +1,29 @@
 "use client";
 
-import React, { useCallback } from "react";
-import ReactFlow, {
-  addEdge,
-  Controls,
-  Edge,
-  Node,
-  OnConnect,
-  useEdgesState,
-  useNodesState,
-} from "reactflow";
+import React from "react";
+import ReactFlow, { Controls } from "reactflow";
 
-import "reactflow/dist/style.css";
+import useStore, { RFState } from "@/store";
+import { shallow } from "zustand/shallow";
 
-const initialNodes: Node[] = [
-  {
-    id: "1",
-    position: {
-      x: 0,
-      y: 0,
-    },
-    data: { label: "1" },
-  },
-  {
-    id: "2",
-    position: {
-      x: 0,
-      y: 100,
-    },
-    data: { label: "2" },
-  },
-];
-
-const initialEdges: Edge[] = [
-  {
-    id: "e1-2",
-    source: "1",
-    target: "2",
-  },
-];
+const selector = (state: RFState) => ({
+  nodes: state.nodes,
+  edges: state.edges,
+  onNodesChange: state.onNodesChange,
+  onEdgesChange: state.onEdgesChange,
+  onConnect: state.onConnect,
+});
 
 export default function App() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-  const onConnect: OnConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges],
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useStore(
+    selector,
+    shallow,
   );
 
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh",
+        height: "calc(100vh - 3.5rem)",
       }}
     >
       <ReactFlow
@@ -62,6 +32,7 @@ export default function App() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        fitView
       >
         <Controls />
       </ReactFlow>
